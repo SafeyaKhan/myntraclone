@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const Bag = () => {
   const bagItems = useSelector((state) => state.bag);
-  const items = useSelector((state) => state.items);
+  const items = useSelector((state) => state.items.allItems);
   const finalItems = items.filter((item) => {
     const itemIndex = bagItems.indexOf(item.id);
     return itemIndex >= 0;

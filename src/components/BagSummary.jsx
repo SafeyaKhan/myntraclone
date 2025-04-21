@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BagSummary = () => {
   const bagItemIds = useSelector((state) => state.bag);
-  const items = useSelector((state) => state.items);
+  const items = useSelector((state) => state.items.allItems);
   const finalItems = items.filter((item) => {
     const itemIndex = bagItemIds.indexOf(item.id);
     return itemIndex >= 0;

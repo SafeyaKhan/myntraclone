@@ -18,6 +18,10 @@ const FetchItems = () => {
     fetch("http://localhost:8080/items", { signal })
       .then((res) => res.json())
       .then(({ items }) => {
+        if (!Array.isArray(items)) {
+          console.error("Fetched data is not an array:", items);
+          return;
+        }
         dispatch(fetchStatusActions.markFetchDone());
         dispatch(fetchStatusActions.markFetchingFinished());
         dispatch(itemsActions.addInitialItems(items));

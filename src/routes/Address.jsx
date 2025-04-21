@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import PhoneInput from "react-phone-input-2";
+import { useNavigate } from "react-router-dom";
 import "react-phone-input-2/lib/style.css";
 import { useDispatch } from "react-redux";
 import { setAddress } from "../store/addressSlice";
 import AddressDisplay from "../components/AddressDisplay";
 
 const Address = () => {
-  // const [phone, setPhone] = useState("");
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -22,9 +22,6 @@ const Address = () => {
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    /* e.preventDefault();
-    alert(`Phone number: ${phone}`); */
-
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -54,6 +51,9 @@ const Address = () => {
       alert("Address submitted successfully!");
       console.log(formData);
     }
+  };
+  const handleProceed = () => {
+    navigate("/checkout");
   };
 
   return (
@@ -107,17 +107,6 @@ const Address = () => {
             <small className="text-danger">{errors.state}</small>
           )}
         </div>
-        {/* <div className="mb-3 ">
-          <label htmlFor="phone" className="form-label">
-            Phone Number
-          </label>
-          <PhoneInput
-            country={"us"} // Default country, change as needed
-            value={phone}
-            onChange={setPhone}
-            inputClass="form-control w-50"
-          />
-        </div> */}
         <div className="mb-3 ">
           <label htmlFor="postalCode" className="form-label">
             Postal Code
@@ -172,6 +161,10 @@ const Address = () => {
       </form>
 
       <AddressDisplay />
+
+      <button onClick={handleProceed} className="proceed-btn">
+        Proceed To Payment
+      </button>
     </div>
   );
 };

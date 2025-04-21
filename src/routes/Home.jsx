@@ -1,18 +1,19 @@
-import HomeItem from "../components/HomeItem";
 import { useSelector } from "react-redux";
+import HomeItem from "../components/HomeItem";
 
 const Home = () => {
-  const items = useSelector((store) => store.items);
-  console.log(items);
+  const filteredItems = useSelector((store) => store.items.filteredItems);
 
   return (
-    <main>
+    <div>
       <div className="items-container">
-        {items.map((item) => (
-          <HomeItem key={item.id} item={item} />
-        ))}
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item) => <HomeItem key={item.id} item={item} />)
+        ) : (
+          <p>No items match your filters.</p>
+        )}
       </div>
-    </main>
+    </div>
   );
 };
 export default Home;
